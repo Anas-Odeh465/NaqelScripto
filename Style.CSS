@@ -557,8 +557,8 @@ body {
   }
   
   .footer-container {
-    flex-wrap: wrap;
-    gap: 3rem;
+    flex-wrap: none;
+    gap: 1rem;
     padding: 0.5rem;
   }
   
