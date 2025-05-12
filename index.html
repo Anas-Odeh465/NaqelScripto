@@ -1,89 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="Images/Naqel-Logo.png">
-        <link rel="stylesheet" href="Style.CSS">
-         <script src="https://cdn.tailwindcss.com"></script>
-        <title>Naqel Script Site</title>
-    </head>
-    <body >
-        <nav class="navigation fixed w-full h-auto mx-auto bg-white overflow-y-auto">
-            
-            <div class="navigation-container flex flex-row justify-between items-center m-10 mt-2  ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="Images/Naqel-Logo.png">
+  <link rel="stylesheet" href="Style.CSS">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Naqel Script Site</title>
+</head>
+<body class="bg-white text-gray-800">
 
-                <div class="flex flex-col">
-                    <a href="Home.HTML" class="logo-link w-40 font-bold text-xl text-green-800 mt-6 cursor-pointer">SM script</a>
-                    <h3 style="font-weight: lighter;" class="text-sm">Made by <strong style="font-size: 16px; font-weight: bold;">Anas Odeh</strong></h3>
-                </div>
-                <div class="search-bar flex flex-row justify-between items-center w-full  p-2 border rounded-full border-gray-300 mt-5  shadow-md">
-                    <input type="text" placeholder="Search for script..." id="input-search" class="input-search w-full h-8 pl-4 pr-4 border-none outline-none">
-                    <img onclick="search()" src="Images/search.png" alt="search" class="icon-search" style="width: 18px; height: 18px;">
-                </div>
+  <!-- Navigation -->
+  <nav class="fixed w-full bg-white shadow-md z-50">
+    <div class="flex flex-col md:flex-row justify-between items-center p-4 md:p-6 gap-4">
+      
+      <!-- Logo -->
+      <div class="flex flex-col items-center md:items-start">
+        <a href="Home.HTML" class="text-green-800 font-bold text-xl md:text-2xl">SM script</a>
+        <h3 class="text-sm font-light">Made by <strong class="font-bold text-base">Anas Odeh</strong></h3>
+      </div>
 
-                <div class="Languges-container flex flex-col justify-center items-center space-y-4">
-                    <div  onclick="OpenLanguges()" title="Script language" class="language-button flex flex-row justify-between items-center  p-4 h-12 gap-4 px-8 border outline-none rounded-full shadow-md  hover:bg-gray-200 cursor-pointer border-gray-300 mt-5">
-                        <div id="languges">
-                            language
-                        </div>  
-                        <img src="Images/language.png" alt="language" class="icon-search" style="width: 18px; height: 18px;">
-                    </div>
-                     <div id="show-languges" class="show-languges fixed top-20  mt-2 z-10 bg-white border border-gray-300 rounded-3xl shadow-md text-center" style="display: none;">
-                        <div class="show-languges-container flex flex-col justify-center items-center w-[130px] space-y-2 p-1">
-                            <span id="ar" onclick="ChangeLanguage('ar')" class="hover:bg-gray-200 p-2 cursor-pointer rounded-3xl w-full">عربي</span>
-                            <span id="en" onclick="ChangeLanguage('en')" class="hover:bg-gray-200 p-2 cursor-pointer rounded-3xl w-full">English</span>
-                        </div>
-                    </div>
-                </div>
-                
-                
-               <div class="Conditions-container flex flex-col justify-center items-center space-y-4">
-                    <div  onclick="OpenConditions()" title="Customer condition" class="Conditions-container-button flex justify-between items-center  p-4 h-12 gap-4 px-8 border outline-none rounded-full shadow-md  hover:bg-gray-200 cursor-pointer border-gray-300 mt-5">
-                        <div id="conditions">
-                            
-                        </div>  
-                        <img src="Images/up-chevron.png" alt="arrow" id="arrow" class="transition-all duration-500 ease-in-out" style="width: 18px; height: 18px;">
-                    </div> 
-                    <div id="show-conditions" class="show-conditions fixed top-20  mt-2 z-10 bg-white border border-gray-300 rounded-3xl shadow-md text-center" style="display: none;">
-                        <div class="show-conditions-list flex flex-col justify-center items-center w-[130px] space-y-2 p-1">
-                            <span id="Neg" onclick="ChangeCondition('All')" class="All hover:bg-gray-200 p-2 cursor-pointer rounded-3xl w-full">All</span>
-                            <span id="pos" onclick="ChangeCondition('Positive')" class="Positive hover:bg-gray-200 p-2 cursor-pointer rounded-3xl w-full">Positive</span>
-                            <span id="Neu" onclick="ChangeCondition('Neutral')" class="Neutral hover:bg-gray-200 p-2 cursor-pointer rounded-3xl w-full">Neutral</span>
-                            <span id="Neg" onclick="ChangeCondition('Negative')" class="Negative hover:bg-gray-200 p-2 cursor-pointer rounded-3xl w-full">Negative</span>
-                        </div>
-                    </div>
-               </div>
+      <!-- Search -->
+      <div class="flex items-center w-full md:w-1/3 border rounded-full shadow px-4 py-2">
+        <input type="text" placeholder="Search for script..." id="input-search"
+               class="w-full h-8 border-none outline-none">
+        <img onclick="search()" src="Images/search.png" alt="search" class="w-5 h-5 cursor-pointer">
+      </div>
 
-            </div>
-        </nav>
+      <!-- Languages -->
+      <div class="relative">
+        <div onclick="OpenLanguges()" title="Script language"
+             class="flex items-center gap-2 px-4 py-2 border rounded-full shadow cursor-pointer hover:bg-gray-200">
+          <span id="languges">language</span>
+          <img src="Images/language.png" alt="language" class="w-5 h-5">
+        </div>
+        <div id="show-languges"
+             class="absolute right-0 mt-2 bg-white border rounded-2xl shadow-md text-center w-32 hidden z-10">
+          <div class="flex flex-col p-2 space-y-1">
+            <span onclick="ChangeLanguage('ar')" class="hover:bg-gray-200 p-2 rounded-full cursor-pointer">عربي</span>
+            <span onclick="ChangeLanguage('en')" class="hover:bg-gray-200 p-2 rounded-full cursor-pointer">English</span>
+          </div>
+        </div>
+      </div>
 
-       <main class="main-container min-h-full pt-20 pb-40 px-8">
-            <table class="table-container min-w-full divide-y divide-gray-200 shadow-md rounded-lg overflow-hidden mt-10">
-                <thead class="table-head bg-green-700 text-white">
-                <tr>
-                    <th class="table-h px-6 py-3 text-center text-sm font-semibold tracking-wider border">Category</th>
-                    <th class="table-h px-6 py-3 text-center text-sm font-semibold tracking-wider ">Script</th>
-                </tr>
-                </thead>
-                <tbody id="script-table-body" class="script-table-body bg-white divide-y divide-gray-200 border border-gray-300">
-                </tbody>
-            </table>
-        </main>
+      <!-- Conditions -->
+      <div class="relative">
+        <div onclick="OpenConditions()" title="Customer condition"
+             class="flex items-center gap-2 px-4 py-2 border rounded-full shadow cursor-pointer hover:bg-gray-200">
+          <span id="conditions">Condition</span>
+          <img src="Images/up-chevron.png" alt="arrow" id="arrow" class="w-4 h-4 transition-transform">
+        </div>
+        <div id="show-conditions"
+             class="absolute right-0 mt-2 bg-white border rounded-2xl shadow-md text-center w-32 hidden z-10">
+          <div class="flex flex-col p-2 space-y-1">
+            <span onclick="ChangeCondition('All')" class="hover:bg-gray-200 p-2 rounded-full cursor-pointer">All</span>
+            <span onclick="ChangeCondition('Positive')" class="hover:bg-gray-200 p-2 rounded-full cursor-pointer">Positive</span>
+            <span onclick="ChangeCondition('Neutral')" class="hover:bg-gray-200 p-2 rounded-full cursor-pointer">Neutral</span>
+            <span onclick="ChangeCondition('Negative')" class="hover:bg-gray-200 p-2 rounded-full cursor-pointer">Negative</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 
+  <!-- Main content -->
+  <main class="pt-32 pb-40 px-4 md:px-8">
+    <div class="overflow-x-auto">
+      <table class="w-full divide-y divide-gray-200 shadow rounded-lg overflow-hidden mt-4 text-sm md:text-base">
+        <thead class="bg-green-700 text-white">
+          <tr>
+            <th class="px-4 py-2 text-center font-semibold">Category</th>
+            <th class="px-4 py-2 text-center font-semibold">Script</th>
+          </tr>
+        </thead>
+        <tbody id="script-table-body" class="bg-white divide-y divide-gray-200">
+          <!-- Data will be injected here -->
+        </tbody>
+      </table>
+    </div>
+  </main>
 
-        
-        <footer class="footer-seaction fixed bottom-0 w-full h-auto  bg-white overflow-y-auto">
-            <div class="footer-container flex flex-row justify-center  bg-white p-4  ">
-                <button onclick="OpenScriptEmail()" id="EmailBTN" class="footer-button flex justify-center items-center p-4 h-12 gap-4 border outline-none rounded-full shadow-md hover:bg-gray-200 cursor-pointer border-gray-300 mt-5">Email</button>
-                <button onclick="OpenScriptXDirect()" id="XDirectbtn" class="footer-button flex justify-center items-center p-4 h-12 gap-4 border outline-none rounded-full shadow-md hover:bg-gray-200 cursor-pointer border-gray-300 mt-5">X Direct</button>
-                <button onclick="OpenScriptXMention()" id="XMentionbtn" class="footer-button flex justify-center items-center p-4 h-12 gap-4 border outline-none rounded-full shadow-md hover:bg-gray-200 cursor-pointer border-gray-300 mt-5">X Mention</button>
-                <button onclick="OpenScriptInstagramFacebook()" id="InstagramFacebookbtn" class="footer-button-long flex justify-center items-center p-4 h-12 gap-4 border outline-none rounded-full shadow-md hover:bg-gray-200 cursor-pointer border-gray-300 mt-5">Instagram & Facebook</button>
-                <button onclick="OpenScriptLiveChat()" id="LiveChatbtn" class="footer-button flex justify-center items-center p-4 h-12 gap-4 border outline-none rounded-full shadow-md hover:bg-gray-200 cursor-pointer border-gray-300 mt-5">Live Chat</button>
-                <button onclick="OpenScriptCallIssue()" id="CallIssuebtn" class="footer-button flex justify-center items-center p-4 h-12 gap-4 border outline-none rounded-full shadow-md hover:bg-gray-200 cursor-pointer border-gray-300 mt-5">Call Issue script</button>
-            </div>
-        </footer>
-        <script src="Functions.JS"></script>
+  <!-- Footer -->
+  <footer class="fixed bottom-0 w-full bg-white shadow-md z-50">
+    <div class="flex flex-wrap justify-center items-center gap-2 md:gap-4 px-2 py-4">
+      <button onclick="OpenScriptEmail()" class="px-4 py-2 border rounded-full shadow hover:bg-gray-200">Email</button>
+      <button onclick="OpenScriptXDirect()" class="px-4 py-2 border rounded-full shadow hover:bg-gray-200">X Direct</button>
+      <button onclick="OpenScriptXMention()" class="px-4 py-2 border rounded-full shadow hover:bg-gray-200">X Mention</button>
+      <button onclick="OpenScriptInstagramFacebook()" class="px-4 py-2 border rounded-full shadow hover:bg-gray-200">Instagram & Facebook</button>
+      <button onclick="OpenScriptLiveChat()" class="px-4 py-2 border rounded-full shadow hover:bg-gray-200">Live Chat</button>
+      <button onclick="OpenScriptCallIssue()" class="px-4 py-2 border rounded-full shadow hover:bg-gray-200">Call Issue</button>
+    </div>
+  </footer>
 
-    </body>
+  <script src="Functions.JS"></script>
+</body>
 </html>
