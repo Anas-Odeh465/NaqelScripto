@@ -36,6 +36,11 @@ function search() {
         case 'CallIssue':
             OpenScriptCallIssue(searchInput);
             break;
+        case 'Greeting':
+            OpenScriptGreeting(searchInput);
+            break;
+        default:
+            '';    
     }
 }
 
@@ -137,6 +142,7 @@ const XMentionbtn = document.getElementById("XMentionbtn");
 const InstagramFacebookbtn = document.getElementById("InstagramFacebookbtn");
 const LiveChatbtn = document.getElementById("LiveChatbtn");
 const CallIssuebtn = document.getElementById("CallIssuebtn");
+const Greetingbtn = document.getElementById("Greetingbtn");
 
 function ResetButtons(OpenScript){
     if(OpenScript === 'Email'){
@@ -145,24 +151,28 @@ function ResetButtons(OpenScript){
         InstagramFacebookbtn.classList.remove('bg-gray-200');
         LiveChatbtn.classList.remove('bg-gray-200');
         CallIssuebtn.classList.remove('bg-gray-200');
+        Greetingbtn.classList.remove('bg-gray-200');
     }else if(OpenScript === 'XDirect'){
         emailbtn.classList.remove('bg-gray-200');
         XMentionbtn.classList.remove('bg-gray-200');
         InstagramFacebookbtn.classList.remove('bg-gray-200');
         LiveChatbtn.classList.remove('bg-gray-200');
         CallIssuebtn.classList.remove('bg-gray-200');
+        Greetingbtn.classList.remove('bg-gray-200');
     }else if(OpenScript === 'XMention'){
         emailbtn.classList.remove('bg-gray-200');
         XDirectbtn.classList.remove('bg-gray-200');
         InstagramFacebookbtn.classList.remove('bg-gray-200');
         LiveChatbtn.classList.remove('bg-gray-200');
         CallIssuebtn.classList.remove('bg-gray-200');
+        Greetingbtn.classList.remove('bg-gray-200');
     }else if(OpenScript === 'InstagramFacebook'){
         emailbtn.classList.remove('bg-gray-200');
         XDirectbtn.classList.remove('bg-gray-200');
         XMentionbtn.classList.remove('bg-gray-200');
         LiveChatbtn.classList.remove('bg-gray-200');
         CallIssuebtn.classList.remove('bg-gray-200');
+        Greetingbtn.classList.remove('bg-gray-200');
     }
     else if(OpenScript === 'LiveChat'){
         emailbtn.classList.remove('bg-gray-200');
@@ -170,12 +180,21 @@ function ResetButtons(OpenScript){
         XMentionbtn.classList.remove('bg-gray-200');
         InstagramFacebookbtn.classList.remove('bg-gray-200');
         CallIssuebtn.classList.remove('bg-gray-200');
+        Greetingbtn.classList.remove('bg-gray-200');
     }else if(OpenScript === 'CallIssue'){
         emailbtn.classList.remove('bg-gray-200');
         XDirectbtn.classList.remove('bg-gray-200');
         XMentionbtn.classList.remove('bg-gray-200');
         InstagramFacebookbtn.classList.remove('bg-gray-200');
         LiveChatbtn.classList.remove('bg-gray-200');
+        Greetingbtn.classList.remove('bg-gray-200');
+    }else if(OpenScript === 'Greeting'){
+        emailbtn.classList.remove('bg-gray-200');
+        XDirectbtn.classList.remove('bg-gray-200');
+        XMentionbtn.classList.remove('bg-gray-200');
+        InstagramFacebookbtn.classList.remove('bg-gray-200');
+        LiveChatbtn.classList.remove('bg-gray-200');
+        CallIssuebtn.classList.remove('bg-gray-200');
     }
 }
 
@@ -197,6 +216,9 @@ if (localStorage.getItem("script") === 'Email'){
 }else if(localStorage.getItem("script") === 'CallIssue'){
     CallIssuebtn.classList.add('bg-gray-200');
     OpenScriptCallIssue();
+}else if(localStorage.getItem("script") === 'Greeting'){
+    Greetingbtn.classList.add('bg-gray-200');
+    OpenScriptGreeting();
 }
 
 function OpenScriptEmail(query = '') {
@@ -1075,7 +1097,7 @@ function OpenScriptLiveChat(query = '') {
         'Complaint request / تم رفع شكوى': "أستاذ/ه ..... ، نعتذر على أي إزعاج.\n تم تسجيل شكواك برقم (#####) والقسم المختص يعمل على حلها حالياً. نعمل على توصيل شحنتك بأسرع وقت ممكن.\n سيصلك تحديث عبر الرسائل النصية، وبإمكانك متابعة حالة الشكوى من خلال موقع ناقل - تتبع الشكاوى..",
     }
 
-     const script_negative_english = {
+    const script_negative_english = {
         '2 رفع طلب Rasie a request': "We apologize for any inconvenience caused. We have notified the concerned department to expedite the shipment delivery. We will contact you for the delivery as soon as it is available.",
         'تصعيد / Escalation': "We apologize for your inconvenience. The shipment has been escalated to the relevant department. It will be followed up and delivered as soon as possible.",
         'طلب رفع شكوى / Raise a complaint': "We apologize for any inconvenience, Please provide us the waybill number, and the complaint details.",
@@ -1303,4 +1325,259 @@ function OpenScriptCallIssue(query = '') {
     }
 }
 
+function OpenScriptGreeting(query = ''){
+
+    const Greetingbtn = document.getElementById("Greetingbtn");
+    Greetingbtn.classList.add('bg-gray-200');
+    localStorage.setItem("script", 'Greeting');
+
+    ResetButtons('Greeting');
+
+    const script_arabic = {
+        "Greeting": "أهلًا بك عميلنا العزيز، معك سيف الدين من شركة ناقل، يرجى تزويدنا باستفسارك حتى نتمكن من مساعدتك",
+        "Waybill Number": "يرجى تزويدنا برقم التتبع المكون من (8) خانات والذي يبدأ بأحد الأرقام التالية (1،2،3،4،5،6،7،8) حتى نتمكن من مساعدتك بشكل أفضل",
+        "Shipment information": "عميلنا العزيز، يرجى تزويدنا بالاسم و رقم الهاتف وعنوانك (المدينة - الحي - الشارع ) أو العنوان الوطني ، حتى نتمكن من مطابقة بياناتك بشكل صحيح يرجى الموافقة لمشاركة بياناتك مع القسم المعني ، حتى يتم رفع الطلب والمتابعة",
+        "Waiting Reply (1)": "بإنتظار ردك عميلنا العزيز",
+        "Waiting Reply (2)": "عميلنا العزيز، للأسف لم يصلنا رد من جهتك، بإمكانك التواصل معنا في وقت آخر في حال لديك أي إستفسار، نشكر تواصلك",
+        "Apologies (1)": "نعتذر منك عن أي خطأ غير مقصود، وتأكد من أننا دائماً حريصين على خدمة عملائنا على أكمل وجه، نقدر صبرك وحسن تفهمك",
+        "Apologies (2)": "نعتذر لانزعاجك، طلبك قيد المتابعة، و تأكد من أننا سنبذل قصارى جهدنا لتسليمها بأسرع وقت ممكن",
+        "Closure (1)": "هل يوجد أي خدمات أخرى ترغب أن أساعدك بها؟",
+        "Closure (2)": "شكراً لتواصلك مع خدمة عملاء ناقل, نتمنى لك يوم سعيد",
+        "Escalation (1)": "نعتذر لإنزعاجك، لقد تم إبلاغ القسم المختص بالإسراع في توصيل الشحنة وسوف يتم التواصل معك للتسليم في أقرب وقت بإذن الله",
+        "Escalation (2)": "نعتذر لإنزعاجك، لقد تم تصعيد شحنتك إلى القسم المختص للإسراع في توصيل الشحنة، وسوف يتم التحقق والتواصل معك لتسليم الشحنة في أقرب وقت ممكن، نقدر صبرك وحسن تفهمك",
+        "Data Registered": "بخصوص تتبع الشحنة، الشحنة رقم () لم تستلم من شركة ناقل بعد وعند استلامها سيتم تزويدك برسالة نصية والتواصل معك في أقرب وقت بإذن الله. كما يمكنك تتبع شحنتك في أي وقت عبر أدواتنا الرقمية في الموقع الإلكتروني، تطبيق الجوال، أو المساعد الرقمي",
+        "Data Registered Notification SMS sent": "الشحنة رقم () لم تستلم من شركة ناقل بعد، يرجى مشاركة معلوماتك عبر الرابط المرسل من خلال الرسائل النصية وعند استلامها من طرفنا سيتم إشعارك بذلك",
+        "Picked up or Pickup Notification SMS sent to receiver": "من الواضح أنه تم استلام شحنتك رقم () من قبل شركة ناقل لكنها لم تصل بعد إلى المستودع الموجود في منطقتك، وعند وصولها سيتم التواصل معك للتسليم في أقرب وقت ممكن إن شاء الله",
+        "Arrived to": "لقد تم استلام شحنتك من شركة ناقل لكنها لم تصل بعد إلى المستودع الموجود في منطقتك، فور وصولها لمستودعات منطقتك سيتم التواصل معك للتسليم",
+        "Held by customs": "يرجى العلم بأن شحنتكم بمتواجدة بالمطار، يرجى تزويدنا بالاسم الكامل، رقم الهاتف، رقم الهوية الوطنية و عنوانك بالتفصيل على هذا النحو (المنطقة/الحي/الشارع/ أقرب معلم بارز)، وسيتم رفعهم للقسم المختص",
+        "Cleared from": "يرجى العلم بأن الشحنة قد خرجت من المطار، و هي بالطريق إلى مستودعات منطقتك، فور وصولها سيتم التواصل معك بأقرب وقت إن شاء الله",
+        "Processed to location": "من الواضح أنه تم استلام شحنتك رقم () من قبل شركة ناقل لكنها لم تصل بعد إلى المستودع الموجود في منطقتك، وعند وصولها سيتم التواصل معك للتسليم في أقرب وقت ممكن إن شاء الله",
+        "Forwarded To / Load to trip / Departed To / Transit": "يرجى العلم بأن الشحنة في مسارها الصحيح إلى مستودعات منطقتك و فور و صولها سيتم العمل على تسليمها لك بأقرب وقت ممكن",
+        "Received / Cons.Arrived at": "شحنتك الآن في منطقتك، وقد تم إبلاغ القسم المختص للإسراع في توصيل الشحنة وسيتم تسليمها إليك في أقرب وقت ممكن إن شاء الله، وعند خروجها للتسليم ستصلك رسالة بذلك",
+        "Inventory Control": "يرجى العلم أن الشحنة () متواجدة الآن في مستودعات الشركة في منطقتك، وسيتم التواصل مع القسم المختص للإسراع في توصيلها",
+        "Sorted to courier": "يرجى العلم بان شحنتك الان في منطقتك وقد تم رفع طلب استعجال للاسراع في تسليمك الشحنة ، وعند خروجها للتسليم ستصلك رسالة بذلك",
+        "COD notification sent / prepaid notification sent / Out for delivery": "من الواضح أن شحنتك قد خرجت للتوصيل اليوم، الرجاء إبقاء هاتفك متاحاً حتى يتمكن المندوب من التواصل معك للتسليم بأقرب وقت ممكن",
+        "No Answer or No answer notification sent": "لقد تمت محاولة التواصل معك على الرقم المسجل على الشحنة () لكن لم يتم الرد، و تم رفع طلب لقسم المختص لإعادة إرسال الشحنة للتسليم بأسرع وقت ممكن",
+        "Vehicle breaks down / No time": "نعتذر عن أي خطأ غير مقصود، لقد تعذر تسليم الشحنة بسبب خلل فني مع المندوب، سيتم إعادة تحدد موعد توصيل الشحنة لحضرتك بأقرب وقت ممكن بإذن الله",
+        "Mobile closed": "يرجى العلم بأنه قد تمت محاولة التواصل معك على الرقم ()، لكن الرقم غير متاح، يرجى التأكد منه حتى نتمكن من رفع طلب لإعادة إرسال الشحنة",
+        "Incorrect Phone number": "يرجى العلم بأنه قد تمت محاولة التواصل معك على الرقم ()، لكن الرقم غير صحيح، يرجى التأكد منه حتى نتمكن من رفع طلب لإعادة إرسال الشحنة",
+        "Shipment Returned to Warehouse": "شحنتك الآن في مستودعات شركة ناقل في منطقتك، وقد تم إبلاغ القسم المختص للإسراع في توصيل الشحنة وسيتم تسليمها إليك في أقرب وقت ممكن إن شاء الله، وعند خروجها للتسليم ستصلك رسالة بذلك",
+        "RTO Request Created": "نعتذر لانزعاجك، لقد تم إبلاغ القسم المختص بالإسراع في توصيل الشحنة وسوف يتم التواصل معك للتسليم في أقرب وقت بإذن الله",
+        "RTO origin": "نأسف لإعلامك بأنه تم استرجاع الشحنة لعدم التمكن من تسليمها لك، وفي حال وجود أي استفسار بخصوصها يرجى التواصل مع الشركة المرسلة",
+        "Delivered": "من الواضح انه تم استلام هذه الشحنة من قبل السيد/السيدة () يرجى التأكد من ذلك، وفي حال لم يتم الاستلام نرجو إفادتنا حالاً ليتم عمل اللازم",
+        "Pharma Shipment": "يرجى تزويدنا باسم المستشفى، رقم ملف المريض، رقم الهاتف والعنوان بالتفصيل، للمساعدة بشكل أفضل",
+        "Pharma Escalation": "يرجى العلم أنه تم إرسال معلومات الشحنة () إلى القسم المختص وسيتم التواصل معك للتسليم في أقرب وقت ممكن إن شاء الله",
+        "After Sales Shipment": "يرجى تزويدنا بالبيانات التالية (اسمك/رَقْم التواصل/اسم المدينة/المحافظة/الحي/اسم الشارع/أقرب معلم بارز) ليتم إرسالها للقسم المختص للتعجيل باستلام الشحنة منك، علماً أن تغليف الطرد يتم من خلالك",
+        "After Sales Escalation": "لقد تم إبلاغ القسم المختص بالإسراع في استلام الشحنة وسوف يتم التواصل معك في أقرب وقت بإذن الله",
+        "Held by customs Escalation": "لقد تم إبلاغ القسم المختص بالإسراع في تخليص الشحنة وسوف يتم التواصل معك في أقرب وقت بإذن الله",
+        "Courier Inquiry": "يرجى التواصل عبر الواتساب: 966506602898+ حتى يتم التحقق و عمل اللازم من قبل الفريق المعني",
+        "Vacancy link": "شكراً لاهتمامك بشركة ناقل",
+        "Information doesn't match": "بياناتك غير مطابقة للبيانات المسجلة على الشحنة وهذا يعني أن رقم التتبع الذي زودتنا به غير تابع لك، حيث نقوم بتسليم الشحنات للعملاء بناءً على البيانات التي يتم تزويدنا بها من المتجر المرسل، نرجو التواصل مع المتجر المرسل لتزويدك برقم التتبع الصحيح للشحنة التي تخصك",
+        "No Shipment Number available": "لمعرفة رقم الشحنة يرجى منكم التواصل مع المتجر المرسل، والتواصل معنا مرة أخرى ليتم تزويدكم بكافة التفاصيل المتعلقة بالشحنة",
+        "Pin Code": "يرجى العلم أن رمز التسليم يتم تزويده للمندوب عند وصوله من أجل التأكيد على تسليم الشحنة",
+        "Change Address / Change Phone Number": "يرجى العلم بأن تعديل العنوان أو رقم الجوال سيؤخر من استلامك للشحنة، يرجى التأكيد حتى نتمكن من مساعدتك",
+        "POS Machine Request": "يرجى العلم بأنه قد تم رفع طلب للقسم المختص لتزويد المندوب ب (شبكة) ليتم الدفع عن طريق البطاقة، و عند خروج الشحنة للتسليم ستصلك رسالة بذلك",
+        "No Scan": "يرجى العلم أن الشحنة () لا يظهر لها أي بيانات مسجلة على النظام لدينا حتى الآن، وهذا يعني إما أن رَقَم التتبع غير صحيح ويجب التأكد منه من الشركة المرسلة، أو أن الشحنة لم تستلم من قبل شركة ناقل بعد، وفي حال تم استلام أي شحنة تخص حضرتكم سيتم إشعاركم بذلك",
+        "Shipping inquiry": "نرجو تزويدنا ببيانات الشحنة (عدد القطع، وزنها، نوع الشحنة، مدينة الإرسال، مدينة الاستلام)، ليتم تزويدكم بتكاليف الشحن",
+        "New Cooperative or Store": "يرجى تزويدنا بالبيانات التالية : (الاسم الكريم / رقم التواصل/ العنوان بالتفصيل / اسم المنشأة واختصاصها / عدد الشحنات المتوقعة بالشهر/ السجل التجاري/ إذا تم التعاقد مع شركة اخرى من قبل وما اسمها)",
+        "Appointment scheduled": "يرجى العلم بأن أقصى مدة لتأجيل استلام الشحنة هو خمس أيام فقط، يرجى تزويدنا بموعد خلال هذه المدة حتى نتمكن من رفع طلب للقسم المختص",
+        "Requires canceling his order": "في حال كنت ترغب بإلغاء الشحنة يمكنك رفض استلامها و التواصل مع المتجر المرسل لإلغائها",
+        "Return Policy": "نعتذر، كافة إجراءات الاسترجاع تتم بواسطة المتجر، لذلك يجب أن تتواصل مع الشركة المرسلة لتخبرهم برغبتك في الإرجاع وأخذ الموافقة و الحصول على رَقَم تتبع الإرجاع، عندها يمكنك التواصل مع خدمة العملاء لحجز موعد استلام الشحنة.‏",
+        "Naqel Contact Number": "بإمكانك التواصل مع مركز خدمة العملاء عبر الرقم التالي(920020505) أو من خلال الرقم المجاني (8002464444 ) رقم الوتساب (00966118296500) مع العلم بأن خدمة العملاء عبر الهاتف متاحة من الساعة 8:00 صباحا حتى الثامنة مساءً",
+        "Payment Methods": "يرجى تزويدنا بالطريقة التي ترغب الدفع بها، علماً بأنه يمكنك الدفع كاش أو بالبطاقة، في حال برغبتك بالدفع عن طريق البطاقة يرجى إعلامنا بذلك حتى يتم ارفاق جهاز الدفع مع المندوب، وبخصوص رابط الدفع يتم إرساله برسالة نصية فور خروج الشحنة للتسليم",
+        "Remote Delivery Area": "شحنتك الآن في منطقتك وتم جدولتها حسب منطقتك، وسيتم تسليمها إليك في أقرب وقت ممكن إن شاء الله، وعند خروجها للتسليم ستصلك رسالة بذلك",
+        "On hold mak": "عميلنا العزيز، نظرًا للقيود المفروضة  على التوصيل في منطقة الحرم ، نرجو منك التوجه لإستلام شحنتك من فرع ناقل\nشكراً لتفهمكم.",
+    }
+
+
+    const script_english = {
+        "Greeting": "Hello our dear customer, this is Saifuddin from Naqel Company. Please provide us with your inquiry so we can assist you.",
+        "Waybill Number": "Please provide us with the 8-digit tracking number starting with one of the following digits (1,2,3,4,5,6,7,8) so we can assist you better.",
+        "Shipment information": "Dear customer, please provide us with your name, phone number, and address (city - district - street) or national address so we can match your data correctly. Please approve sharing your data with the relevant department to raise the request and follow up.",
+        "Waiting Reply (1)": "Waiting for your reply, our dear customer.",
+        "Waiting Reply (2)": "Dear customer, unfortunately we haven't received a response from you. You can contact us at another time if you have any inquiries. Thank you for contacting us.",
+        "Apologies (1)": "We apologize for any unintended mistakes, and rest assured that we are always keen to serve our customers to the fullest. We appreciate your patience and understanding.",
+        "Apologies (2)": "We apologize for the inconvenience. Your request is being followed up, and rest assured we will do our best to deliver it as soon as possible.",
+        "Closure (1)": "Are there any other services you would like me to help you with?",
+        "Closure (2)": "Thank you for contacting Naqel customer service. We wish you a happy day.",
+        "Escalation (1)": "We apologize for the inconvenience. The concerned department has been notified to expedite the delivery of your shipment, and you will be contacted for delivery as soon as possible, God willing.",
+        "Escalation (2)": "We apologize for the inconvenience. Your shipment has been escalated to the concerned department to expedite delivery, and verification will be done to contact you for delivery as soon as possible. We appreciate your patience and understanding.",
+        "Data Registered": "Regarding shipment tracking, shipment number () has not been received by Naqel yet. When received, you will be notified via SMS and contacted as soon as possible, God willing. You can also track your shipment anytime through our digital tools on the website, mobile app, or digital assistant.",
+        "Data Registered Notification SMS sent": "Shipment number () has not been received by Naqel yet. Please share your information via the link sent through SMS, and when received by us, you will be notified.",
+        "Picked up or Pickup Notification SMS sent to receiver": "It appears your shipment number () has been received by Naqel but hasn't arrived at the warehouse in your area yet. Upon arrival, you will be contacted for delivery as soon as possible, God willing.",
+        "Arrived to": "Your shipment has been received by Naqel but hasn't arrived at the warehouse in your area yet. Once it arrives at your local warehouse, you will be contacted for delivery.",
+        "Held by customs": "Please note that your shipment is at the airport. Please provide us with your full name, phone number, national ID number, and detailed address (region/district/street/nearest landmark) to be forwarded to the concerned department.",
+        "Cleared from": "Please note that the shipment has left the airport and is on its way to your local warehouse. Upon arrival, you will be contacted as soon as possible, God willing.",
+        "Processed to location": "It appears your shipment number () has been received by Naqel but hasn't arrived at the warehouse in your area yet. Upon arrival, you will be contacted for delivery as soon as possible, God willing.",
+        "Forwarded To / Load to trip / Departed To / Transit": "Please note that the shipment is on its correct path to your local warehouse, and upon arrival, efforts will be made to deliver it to you as soon as possible.",
+        "Received / Cons.Arrived at": "Your shipment is now in your area, and the concerned department has been notified to expedite delivery. It will be delivered to you as soon as possible, God willing. You will receive a notification when it's out for delivery.",
+        "Inventory Control": "Please note that shipment () is now at the company's warehouse in your area, and the concerned department will be contacted to expedite delivery.",
+        "Sorted to courier": "Please note that your shipment is now in your area, and an expedited delivery request has been raised. You will receive a notification when it's out for delivery.",
+        "COD notification sent / prepaid notification sent / Out for delivery": "It appears your shipment is out for delivery today. Please keep your phone available so the courier can contact you for delivery as soon as possible.",
+        "No Answer or No answer notification sent": "We tried to contact you on the number registered for shipment () but received no answer. A request has been raised to the concerned department to resend the shipment for delivery as soon as possible.",
+        "Vehicle breaks down / No time": "We apologize for any unintended mistakes. The shipment couldn't be delivered due to a technical issue with the courier. A new delivery date will be scheduled for you as soon as possible, God willing.",
+        "Mobile closed": "Please note that we tried to contact you on number (), but it's unavailable. Please verify it so we can raise a request to resend the shipment.",
+        "Incorrect Phone number": "Please note that we tried to contact you on number (), but it's incorrect. Please verify it so we can raise a request to resend the shipment.",
+        "Shipment Returned to Warehouse": "Your shipment is now at Naqel's warehouse in your area, and the concerned department has been notified to expedite delivery. It will be delivered to you as soon as possible, God willing. You will receive a notification when it's out for delivery.",
+        "RTO Request Created": "We apologize for the inconvenience. The concerned department has been notified to expedite the delivery of your shipment, and you will be contacted for delivery as soon as possible, God willing.",
+        "RTO origin": "We regret to inform you that the shipment has been returned as we couldn't deliver it to you. If you have any inquiries about it, please contact the sending company.",
+        "Delivered": "It appears this shipment has been received by Mr./Mrs. (). Please verify this, and if it hasn't been received, please inform us immediately so we can take necessary action.",
+        "Pharma Shipment": "Please provide us with the hospital name, patient file number, phone number, and detailed address for better assistance.",
+        "Pharma Escalation": "Please note that shipment () information has been sent to the concerned department, and you will be contacted for delivery as soon as possible, God willing.",
+        "After Sales Shipment": "Please provide us with the following details (your name/contact number/city name/governorate/district/street name/nearest landmark) to be sent to the concerned department to expedite receiving the shipment from you. Note that package wrapping is your responsibility.",
+        "After Sales Escalation": "The concerned department has been notified to expedite receiving the shipment, and you will be contacted as soon as possible, God willing.",
+        "Held by customs Escalation": "The concerned department has been notified to expedite clearing the shipment, and you will be contacted as soon as possible, God willing.",
+        "Courier Inquiry": "Please contact us via WhatsApp: +966506602898 for verification and necessary action by the concerned team.",
+        "Vacancy link": "Thank you for your interest in Naqel Company.",
+        "Information doesn't match": "Your data doesn't match the data registered for the shipment, which means the tracking number you provided doesn't belong to you. We deliver shipments to customers based on the data provided by the sending store. Please contact the sending store to provide you with the correct tracking number for your shipment.",
+        "No Shipment Number available": "To know the shipment number, please contact the sending store, then contact us again to provide you with all shipment details.",
+        "Pin Code": "Please note that the delivery code is provided to the courier upon arrival to confirm shipment delivery.",
+        "Change Address / Change Phone Number": "Please note that changing the address or mobile number will delay receiving your shipment. Please confirm so we can assist you.",
+        "POS Machine Request": "Please note that a request has been raised to the concerned department to provide the courier with a (network) for card payment. You will receive a notification when the shipment is out for delivery.",
+        "No Scan": "Please note that shipment () shows no data registered in our system yet. This means either the tracking number is incorrect and should be verified with the sending company, or the shipment hasn't been received by Naqel yet. If any shipment belonging to you is received, you will be notified.",
+        "Shipping inquiry": "Please provide us with shipment details (number of pieces, weight, shipment type, sending city, receiving city) to provide you with shipping costs.",
+        "New Cooperative or Store": "Please provide us with the following details: (your name/contact number/detailed address/establishment name and specialty/expected number of monthly shipments/commercial register/if contracted with another company before and its name).",
+        "Appointment scheduled": "Please note that the maximum period to postpone receiving the shipment is five days only. Please provide us with an appointment within this period so we can raise a request to the concerned department.",
+        "Requires canceling his order": "If you wish to cancel the shipment, you can refuse to receive it and contact the sending store to cancel it.",
+        "Return Policy": "We apologize. All return procedures are handled by the store, so you must contact the sending company to inform them of your desire to return, obtain approval, and get a return tracking number. Then you can contact customer service to schedule a pickup appointment.",
+        "Naqel Contact Number": "You can contact customer service center via the following number (920020505) or the toll-free number (8002464444), WhatsApp number (00966118296500). Note that phone customer service is available from 8:00 AM until 8:00 PM.",
+        "Payment Methods": "Please inform us of your preferred payment method. Note that you can pay cash or by card. If you prefer card payment, please inform us so we can provide the courier with a payment device. Regarding payment link, it will be sent via SMS once the shipment is out for delivery.",
+        "Remote Delivery Area": "Your shipment is now in your area and has been scheduled according to your area. It will be delivered to you as soon as possible, God willing. You will receive a notification when it's out for delivery.",
+        "On hold mak": "Dear Customer, Due to delivery restrictions in the Haram area, please contact us to pick up your shipment from a Naqel branch.\nThank you for your understanding."
+    };
+
+    const script_negative_arabic = {
+       "Apologies (1)": "نعتذر منك عن أي خطأ غير مقصود، وتأكد من أننا دائماً حريصين على خدمة عملائنا على أكمل وجه، نقدر صبرك وحسن تفهمك",
+       "Apologies (2)": "نعتذر لانزعاجك، طلبك قيد المتابعة، و تأكد من أننا سنبذل قصارى جهدنا لتسليمها بأسرع وقت ممكن",
+       "Escalation (1)": "نعتذر لإنزعاجك، لقد تم إبلاغ القسم المختص بالإسراع في توصيل الشحنة وسوف يتم التواصل معك للتسليم في أقرب وقت بإذن الله",
+       "Escalation (2)": "نعتذر لإنزعاجك، لقد تم تصعيد شحنتك إلى القسم المختص للإسراع في توصيل الشحنة، وسوف يتم التحقق والتواصل معك لتسليم الشحنة في أقرب وقت ممكن، نقدر صبرك وحسن تفهمك",
+    }
+
+    const script_negative_english = {
+       "Apologies (1)": "We apologize for any unintended mistakes, and rest assured that we are always keen to serve our customers to the fullest. We appreciate your patience and understanding.",
+       "Apologies (2)": "We apologize for the inconvenience. Your request is being followed up, and rest assured we will do our best to deliver it as soon as possible.",
+       "Escalation (1)": "We apologize for the inconvenience. The concerned department has been notified to expedite the delivery of your shipment, and you will be contacted for delivery as soon as possible, God willing.",
+       "Escalation (2)": "We apologize for the inconvenience. Your shipment has been escalated to the concerned department to expedite delivery, and verification will be done to contact you for delivery as soon as possible. We appreciate your patience and understanding.",
+    }
+
+    const script_positive_arabic = {
+        "Greeting": "أهلًا بك عميلنا العزيز، معك سيف الدين من شركة ناقل، يرجى تزويدنا باستفسارك حتى نتمكن من مساعدتك",
+    }
+
+    const script_positive_english = {
+        "Greeting": "Hello our dear customer, this is Saifuddin from Naqel Company. Please provide us with your inquiry so we can assist you.",
+    }
+
+    let Language = localStorage.getItem("lang") || '';
+    let condition = localStorage.getItem("Conditions") || '';
+    let script = '';
+
+    if (Language !== '' && condition !== '') {
+        if (Language === 'عربي') {
+            if (condition === 'Negative') {
+                script = script_negative_arabic;
+            } else if (condition === 'Positive') {
+                script = script_positive_arabic;
+            } else if (condition === 'All' || condition === 'Neutral') {
+                script = script_arabic;
+            }
+        } else if (Language === 'English') {
+            if (condition === 'Negative') {
+                script = script_negative_english;
+            } else if (condition === 'Positive') {
+                script = script_positive_english;
+            } else if (condition === 'All' || condition === 'Neutral') {
+                script = script_english;
+            }
+        }
+    } else if (Language !== '' && condition === '') {
+        if (Language === 'عربي') {
+            script = script_arabic;
+        } else if (Language === 'English') {
+            script = script_english;
+        }
+    } else if (Language === '' && condition !== '') {
+        if (condition === 'Negative') {
+            script = script_negative_arabic;
+        }else if(condition === 'Positive'){
+            script = script_positive_arabic; 
+        } else {
+            script = script_arabic; 
+        }
+    } else {
+        script = script_arabic;
+    }
+
+    const tbody = document.getElementById("script-table-body");
+    tbody.innerHTML = "";
+
+    for (const category in script) {
+        const value = script[category];
+        const searchText = query.toLowerCase();
+        
+        if(query === '' || 
+           category.toLowerCase().includes(searchText) || 
+           value.toLowerCase().includes(searchText)) {
+            
+            const tr = document.createElement("tr");
+            tr.classList.add("hover:bg-gray-50");
+
+            const tdCategory = document.createElement("td");
+            tdCategory.className = "px-6 py-4 text-center font-bold align-middle border border-gray-200";
+            tdCategory.textContent = category;
+
+            const tdScript = document.createElement("td");
+            tdScript.className = "px-6 py-4 whitespace-pre-wrap align-middle border border-gray-200 relative group";
+
+            const isArabic = /[\u0600-\u06FF]/.test(value);
+
+            tdScript.style.direction = isArabic ? "rtl" : "ltr";
+            tdScript.style.textAlign = isArabic ? "right" : "left";
+            tdScript.textContent = value;
+
+            const copyButton = document.createElement("button");
+            copyButton.className = "copy-icon m-10 bg-gray-100 rounded-md transition-all duration-200 ease-in-out";
+            copyButton.title = "Copy to clipboard";
+
+            copyButton.style.display = "flex"; 
+            copyButton.style.alignItems = "center"; 
+            copyButton.style.padding = "0.25rem 0.5rem"; 
+            copyButton.style.border = "1px solid #ccc"; 
+            copyButton.style.cursor = "pointer"; 
+            copyButton.style.borderRadius = "1.25rem"; 
+
+            const copyIcon = document.createElement("img");
+            copyIcon.src = "Images/copy.png";
+            copyIcon.alt = "Copy";
+            copyIcon.style.width = "26px";
+            copyIcon.style.height = "26px";
+            copyIcon.style.marginRight = "0.25rem"; 
+
+            copyButton.appendChild(copyIcon);
+
+            copyButton.addEventListener("click", (e) => {
+                e.stopPropagation();
+                navigator.clipboard.writeText(value)
+                    .then(() => {
+                        const originalSrc = copyIcon.src;
+                        copyIcon.src = "Images/circle.png"; 
+                        copyIcon.className = "w-4 h-4"; 
+                        copyButton.classList.add("bg-green-100");
+                        setTimeout(() => {
+                            copyIcon.src = originalSrc;
+                            copyButton.classList.remove("bg-green-100");
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
+            });
+
+            tdScript.appendChild(copyButton);
+            tr.appendChild(tdCategory);
+            tr.appendChild(tdScript);
+            tbody.appendChild(tr);
+        }
+    }
+}
 
