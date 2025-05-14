@@ -133,6 +133,64 @@ function ChangeCondition(conditions){
     window.location.reload();
 }
 
+// settings section 
+
+function OpenSettings(){
+    const settingsbtn = document.getElementById("settingsbtn");
+    const showSettings = document.getElementById("show-settings");
+
+    document.addEventListener("click", function(event) {
+        if (!settingsbtn.contains(event.target) && !showSettings.contains(event.target)) {
+            showSettings.style.display = "none";
+        }
+    });
+
+    if (showSettings.style.display == "block"){
+        showSettings.style.display = "none";
+    }
+    else{
+        showSettings.style.display = "block";
+    }
+}
+
+let NameInput_arabic = document.getElementById("Name-Arabic");
+let NameInput_english = document.getElementById("Name-English");
+
+function SaveSettings() {
+    const NameInput_ar = document.getElementById("Name-Arabic");
+    const NameInput_en = document.getElementById("Name-English");
+    const savedbtn = document.getElementById("saved-button");
+
+    localStorage.setItem("Name-Arabic", NameInput_ar.value.trim());
+    localStorage.setItem("Name-English", NameInput_en.value.trim());
+
+    const originalText = savedbtn.innerHTML;
+
+    const SaveIcon = document.createElement("img");
+    SaveIcon.src = "Images/circle.png";
+    SaveIcon.alt = "Saved";
+    SaveIcon.style.width = "20px";
+    SaveIcon.style.height = "20px";
+    SaveIcon.style.marginRight = "0.25rem";
+    SaveIcon.className = "inline-block";
+
+    savedbtn.innerHTML = ''; 
+    savedbtn.appendChild(SaveIcon);
+    savedbtn.appendChild(document.createTextNode("Saved"));
+    savedbtn.classList.add("bg-green-100");
+
+    setTimeout(() => {
+        savedbtn.innerHTML = originalText;
+        savedbtn.classList.remove("bg-green-100");
+        window.location.reload();
+    }, 2000);
+}
+
+
+NameInput_arabic.value  = localStorage.getItem("Name-Arabic") || '';
+NameInput_english.value  = localStorage.getItem("Name-English") || '';
+
+
 // Script section and functions categoryes and scripts
 //         <script src="https://cdn.tailwindcss.com"></script>
 
@@ -1037,7 +1095,7 @@ function OpenScriptLiveChat(query = '') {
     ResetButtons('LiveChat');
 
     const script_arabic = {
-        'Welcome ترحيب -': "حياك الله عميلنا العزيز معك ## من شركة ناقل كيف أقدر أساعدك؟",
+        'Welcome ترحيب -': `حياك الله عميلنا العزيز معك ${localStorage.getItem("Name-Arabic") || '###'} من شركة ناقل كيف أقدر أساعدك؟`,
         'Ask for the customer name طلب اسم العميل /': "ممكن تزودني بالاسم من فضلك؟",
         'Moments please - لحظات من فضلك': "لحظات من فضلك أستاذ/ه ….، شاكرين انتظارك.",
         'Waiting إنتظار 1 /': "نحن هنا لخدمتك، بانتظار ردك.",
@@ -1064,7 +1122,7 @@ function OpenScriptLiveChat(query = '') {
     };
 
     const script_english = {
-        'Welcome ترحيب -': "Hello and welcome, dear customer, This is ( ) from Naqel. How may I assist you?",
+        'Welcome ترحيب -': `Hello and welcome, dear customer, This is ${localStorage.getItem('Name-English') || '###'} from Naqel. How may I assist you?`,
         'Ask for the customer name طلب اسم العميل /': "May I have your name, please?",
         'Moments please - لحظات من فضلك': "Please hold on for a moment, Thank you for your patience.",
         'Waiting إنتظار 1 /': "We are waiting for your reply, dear customer",
@@ -1334,7 +1392,7 @@ function OpenScriptGreeting(query = ''){
     ResetButtons('Greeting');
 
     const script_arabic = {
-        "Greeting": "أهلًا بك عميلنا العزيز، معك سيف الدين من شركة ناقل، يرجى تزويدنا باستفسارك حتى نتمكن من مساعدتك",
+        "Greeting": `أهلًا بك عميلنا العزيز، معك ${localStorage.getItem("Name-Arabic") || '###'} من شركة ناقل، يرجى تزويدنا باستفسارك حتى نتمكن من مساعدتك`,
         "Waybill Number": "يرجى تزويدنا برقم التتبع المكون من (8) خانات والذي يبدأ بأحد الأرقام التالية (1،2،3،4،5،6،7،8) حتى نتمكن من مساعدتك بشكل أفضل",
         "Shipment information": "عميلنا العزيز، يرجى تزويدنا بالاسم و رقم الهاتف وعنوانك (المدينة - الحي - الشارع ) أو العنوان الوطني ، حتى نتمكن من مطابقة بياناتك بشكل صحيح يرجى الموافقة لمشاركة بياناتك مع القسم المعني ، حتى يتم رفع الطلب والمتابعة",
         "Waiting Reply (1)": "بإنتظار ردك عميلنا العزيز",
@@ -1382,7 +1440,7 @@ function OpenScriptGreeting(query = ''){
         "New Cooperative or Store": "يرجى تزويدنا بالبيانات التالية : (الاسم الكريم / رقم التواصل/ العنوان بالتفصيل / اسم المنشأة واختصاصها / عدد الشحنات المتوقعة بالشهر/ السجل التجاري/ إذا تم التعاقد مع شركة اخرى من قبل وما اسمها)",
         "Appointment scheduled": "يرجى العلم بأن أقصى مدة لتأجيل استلام الشحنة هو خمس أيام فقط، يرجى تزويدنا بموعد خلال هذه المدة حتى نتمكن من رفع طلب للقسم المختص",
         "Requires canceling his order": "في حال كنت ترغب بإلغاء الشحنة يمكنك رفض استلامها و التواصل مع المتجر المرسل لإلغائها",
-        "Return Policy": "نعتذر، كافة إجراءات الاسترجاع تتم بواسطة المتجر، لذلك يجب أن تتواصل مع الشركة المرسلة لتخبرهم برغبتك في الإرجاع وأخذ الموافقة و الحصول على رَقَم تتبع الإرجاع، عندها يمكنك التواصل مع خدمة العملاء لحجز موعد استلام الشحنة.‏",
+        "Return Policy": "نعتذر، كافة إجراءات الاسترجاع تتم بواسطة المتجر، لذلك يجب أن تتواصل مع الشركة المرسلة لتخبرهم برغبتك في الإرجاع وأخذ الموافقة و الحصول على رَقَم تتبع الإرجاع، عندها يمكنك التواصل مع خدمة العملاء لحجز موعد استلام الشحنة.",
         "Naqel Contact Number": "بإمكانك التواصل مع مركز خدمة العملاء عبر الرقم التالي(920020505) أو من خلال الرقم المجاني (8002464444 ) رقم الوتساب (00966118296500) مع العلم بأن خدمة العملاء عبر الهاتف متاحة من الساعة 8:00 صباحا حتى الثامنة مساءً",
         "Payment Methods": "يرجى تزويدنا بالطريقة التي ترغب الدفع بها، علماً بأنه يمكنك الدفع كاش أو بالبطاقة، في حال برغبتك بالدفع عن طريق البطاقة يرجى إعلامنا بذلك حتى يتم ارفاق جهاز الدفع مع المندوب، وبخصوص رابط الدفع يتم إرساله برسالة نصية فور خروج الشحنة للتسليم",
         "Remote Delivery Area": "شحنتك الآن في منطقتك وتم جدولتها حسب منطقتك، وسيتم تسليمها إليك في أقرب وقت ممكن إن شاء الله، وعند خروجها للتسليم ستصلك رسالة بذلك",
@@ -1391,7 +1449,7 @@ function OpenScriptGreeting(query = ''){
 
 
     const script_english = {
-        "Greeting": "Hello our dear customer, this is Saifuddin from Naqel Company. Please provide us with your inquiry so we can assist you.",
+        "Greeting": `Hello our dear customer, this is ${localStorage.getItem("Name-English") || '###'} from Naqel Company. Please provide us with your inquiry so we can assist you.`,
         "Waybill Number": "Please provide us with the 8-digit tracking number starting with one of the following digits (1,2,3,4,5,6,7,8) so we can assist you better.",
         "Shipment information": "Dear customer, please provide us with your name, phone number, and address (city - district - street) or national address so we can match your data correctly. Please approve sharing your data with the relevant department to raise the request and follow up.",
         "Waiting Reply (1)": "Waiting for your reply, our dear customer.",
